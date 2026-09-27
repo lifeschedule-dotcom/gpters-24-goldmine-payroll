@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>규칙 파일 내려받기</title>
+<style>
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f6e3e1;font-family:'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif;color:#1f2430}
+  .card{background:#fff;border-radius:18px;padding:32px 36px;max-width:420px;width:calc(100% - 48px);box-shadow:0 6px 24px rgba(90,34,51,.12);text-align:center}
+  .tag{color:#b0566e;font-weight:700;font-size:14px}
+  h1{font-size:24px;margin:8px 0 12px}
+  p{color:#5b6275;line-height:1.7;margin:0 0 18px}
+  a.btn{display:inline-block;background:#b0566e;color:#fff;text-decoration:none;font-weight:700;padding:12px 22px;border-radius:999px}
+  .where{margin-top:18px;font-size:14px;color:#5a2233;background:#fbf1f4;border-radius:10px;padding:10px 12px}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="tag">1주차 규칙 파일</div>
+  <h1 id="name">파일 내려받기</h1>
+  <p id="msg">잠깐만요, 파일을 내려받고 있어요.</p>
+  <a class="btn" id="again" href="#">다시 내려받기</a>
+  <div class="where" id="where"></div>
+</div>
+<script>
+  var FILES = {
+    'AGENTS.md': 'me 폴더(AI 작업 폴더) 바로 안에 넣어요',
+    'CLAUDE.md': 'me 폴더(AI 작업 폴더) 바로 안에 넣어요',
+    'AI협업규칙.md': 'me 안의 Obsidian Vault(옵시디언 보관함)에 넣어요'
+  };
+  var f = new URLSearchParams(location.search).get('f') || '';
+  var nameEl = document.getElementById('name'), msg = document.getElementById('msg'), again = document.getElementById('again');
+  if (!FILES[f]) {
+    nameEl.textContent = '파일을 고르지 않았어요';
+    msg.textContent = '수업 자료의 내려받기 버튼을 다시 눌러 주세요.';
+    again.style.display = 'none';
+  } else {
+    nameEl.textContent = f;
+    document.getElementById('where').textContent = '넣는 곳: ' + FILES[f];
+    function go() {
+      fetch('rule-files/' + encodeURIComponent(f)).then(function (r) {
+        if (!r.ok) throw new Error(r.status);
+        return r.blob();
+      }).then(function (b) {
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(new Blob([b], { type: 'text/markdown;charset=utf-8' }));
+        a.download = f;
+        document.body.appendChild(a); a.click(); a.remove();
+        msg.textContent = '내려받았어요! 「다운로드」 폴더를 확인해 보세요. 이 창은 닫아도 돼요.';
+      }).catch(function () {
+        msg.textContent = '내려받기가 안 됐어요. 아래 버튼을 한 번 더 눌러 주세요.';
+      });
+    }
+    again.onclick = function (e) { e.preventDefault(); go(); };
+    go();
+  }
+</script>
+</body>
+</html>
