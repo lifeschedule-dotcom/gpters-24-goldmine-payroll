@@ -28,7 +28,13 @@
     'CLAUDE.md': 'me 폴더(AI 작업 폴더) 바로 안에 넣어요',
     'AI협업규칙.md': 'me 안의 Obsidian Vault(옵시디언 보관함)에 넣어요'
   };
+  var EXTRA = {
+    '00_북부성_실습_상황.md': 'AI 채팅창에 끌어다 놓아요 (도전 코스: me\\북부대공 폴더에)',
+    '대공의_서류.md': '대공이 건넨 서류예요. AI 채팅창에 끌어다 놓아요'
+  };
+  var DIRS = { '00_북부성_실습_상황.md': '', '대공의_서류.md': 'duke/' };
   var f = new URLSearchParams(location.search).get('f') || '';
+  if (EXTRA[f]) { FILES[f] = EXTRA[f]; }
   var nameEl = document.getElementById('name'), msg = document.getElementById('msg'), again = document.getElementById('again');
   if (!FILES[f]) {
     nameEl.textContent = '규칙 파일 3개';
@@ -49,7 +55,7 @@
     nameEl.textContent = f;
     document.getElementById('where').textContent = '넣는 곳: ' + FILES[f];
     function go() {
-      fetch('rule-files/' + encodeURIComponent(f)).then(function (r) {
+      fetch((DIRS[f] || 'rule-files/') + encodeURIComponent(f)).then(function (r) {
         if (!r.ok) throw new Error(r.status);
         return r.blob();
       }).then(function (b) {
