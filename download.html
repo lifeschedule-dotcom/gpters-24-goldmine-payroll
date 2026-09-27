@@ -31,9 +31,20 @@
   var f = new URLSearchParams(location.search).get('f') || '';
   var nameEl = document.getElementById('name'), msg = document.getElementById('msg'), again = document.getElementById('again');
   if (!FILES[f]) {
-    nameEl.textContent = '파일을 고르지 않았어요';
-    msg.textContent = '수업 자료의 내려받기 버튼을 다시 눌러 주세요.';
+    nameEl.textContent = '규칙 파일 3개';
+    msg.textContent = '하나씩 눌러서 세 개 모두 받아 주세요.';
     again.style.display = 'none';
+    var box = document.getElementById('where');
+    box.style.background = 'none'; box.style.padding = '0';
+    Object.keys(FILES).forEach(function (k) {
+      var a = document.createElement('a');
+      a.className = 'btn'; a.href = '?f=' + encodeURIComponent(k);
+      a.textContent = '⬇  ' + k + ' 내려받기';
+      a.style.display = 'block'; a.style.margin = '10px 0 4px';
+      var s = document.createElement('div');
+      s.textContent = FILES[k]; s.style.fontSize = '13px'; s.style.color = '#5b6275'; s.style.marginBottom = '8px';
+      box.appendChild(a); box.appendChild(s);
+    });
   } else {
     nameEl.textContent = f;
     document.getElementById('where').textContent = '넣는 곳: ' + FILES[f];
