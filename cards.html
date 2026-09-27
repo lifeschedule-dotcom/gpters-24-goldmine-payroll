@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>북부성 금광 실습 카드</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;background:#25160f;color:#281d17;font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif}
+.card{display:none;position:relative;width:1600px;height:900px;background:url("assets/북부성_장부_빈양피지_단면.png") center/cover no-repeat;overflow:hidden}
+.card.active{display:block}
+.content{position:absolute;left:220px;top:105px;width:1160px;height:700px}
+h1{font-size:48px;line-height:1.1;margin:0 0 14px;font-weight:900;letter-spacing:-.025em}
+.subtitle{font-size:23px;line-height:1.4;margin:0 0 28px;color:#513b2b}
+table{width:100%;border-collapse:collapse;font-size:26px;line-height:1.42}
+th,td{padding:12px 16px;border-bottom:2px solid rgba(75,50,33,.45);text-align:left}
+th{background:rgba(78,50,31,.11);font-size:24px;font-weight:800}
+td:last-child,th:last-child{text-align:right}
+p,li{font-size:27px;line-height:1.5}
+small{font-size:20px}
+.notes{margin-top:22px;padding:16px 21px;background:rgba(255,248,228,.42);border-left:6px solid #793421;font-size:24px;line-height:1.45}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.step{padding:12px 17px;border:2px solid rgba(84,53,35,.55);background:rgba(255,247,225,.25);min-height:145px}
+.step strong{font-size:29px;display:block;margin-bottom:8px}
+.step span{font-size:22px;line-height:1.4}
+.answer table{font-size:23px}
+.answer th,.answer td{padding:8px 9px}
+.answer .big{font-size:33px;font-weight:900;margin:15px 0 0}
+.flag{font-size:22px;margin:9px 0}
+.badge{position:absolute;right:20px;top:10px;font-size:22px;font-weight:800;color:#7b2c1c}
+</style>
+</head>
+<body>
+<section class="card" id="work">
+  <div class="content">
+    <div class="badge">임무 1 / 근무</div>
+    <h1>금광 근무 명령서</h1>
+    <p class="subtitle">한 주(월~금) · 네 명 모두 개근 · 주간 1만원 / 야간조 1만5천원</p>
+    <table>
+      <thead><tr><th>인부</th><th>근무일</th><th>출근~퇴근</th><th>무급 휴게</th><th>주 유급시간</th></tr></thead>
+      <tbody>
+        <tr><td>아린</td><td>월·화·수·목</td><td>09~18시</td><td>12~13시</td><td>32시간</td></tr>
+        <tr><td>보라</td><td>금</td><td>09~18시</td><td>12~13시</td><td>8시간</td></tr>
+        <tr><td>카이</td><td>월·화·수·목</td><td>18~23시</td><td>20:30~21시</td><td>18시간</td></tr>
+        <tr><td>루나</td><td>금</td><td>18~23시</td><td>20:30~21시</td><td>4.5시간</td></tr>
+      </tbody>
+    </table>
+    <div class="notes">게임 속 주휴: 주 15시간 이상·개근 → 주휴시간 = 주 유급시간 ÷ 40 × 8<br>게임 속 공제: 공제 전 급여의 국세 3% + 지방세 0.3%, 각각 1원 반올림</div>
+  </div>
+</section>
+<section class="card" id="expense">
+  <div class="content">
+    <div class="badge">임무 2 / 경비</div>
+    <h1>왕실 지출 명세</h1>
+    <p class="subtitle">식사비와 물품은 인부 급여에서 빼지 않고 별도 장부에 적습니다</p>
+    <table>
+      <thead><tr><th>항목</th><th>이번 주 구매 조건</th><th>계산할 금액</th></tr></thead>
+      <tbody>
+        <tr><td>인부 식사비</td><td>한 사람의 근무일마다 1만원</td><td>?</td></tr>
+        <tr><td>곡괭이</td><td>5개 × 5천원</td><td>?</td></tr>
+        <tr><td>캘빈클레인 청바지</td><td>인부마다 1개 × 게임 가격 3만원</td><td>?</td></tr>
+        <tr><td>GPT 사용료</td><td>이번 주 한 번 5만원</td><td>?</td></tr>
+      </tbody>
+    </table>
+    <div class="notes">대공이 알고 싶은 것: 인부에게 보낼 돈 / 따로 납부할 게임 세금 / 경비 / 모두 합친 총지출</div>
+  </div>
+</section>
+<section class="card" id="prompt">
+  <div class="content">
+    <div class="badge">임무 3 / AI와 대화</div>
+    <h1>집사 AI에게 이렇게 맡기세요</h1>
+    <p class="subtitle">GitHub의 「복사용 요청문」에는 아래 네 문장의 자세한 버전이 있습니다</p>
+    <div class="two">
+      <div class="step"><strong>1 · 먼저 물어봐</strong><span>계산 금액을 바꿀 수 있는 빠진 조건을 다섯 개까지만 질문해줘.</span></div>
+      <div class="step"><strong>2 · 급여 장부</strong><span>근무·휴게·주휴·게임 세금을 인부별로 계산하고 합계를 검산해줘.</span></div>
+      <div class="step"><strong>3 · 경비 장부</strong><span>식사비·곡괭이·선물·GPT 비용을 급여와 분리해줘.</span></div>
+      <div class="step"><strong>4 · 내가 틀릴 수도 있어</strong><span>현실의 한국 급여에 쓰기 전에 틀린 조건과 빠진 사실을 찾아줘.</span></div>
+    </div>
+    <div class="notes">한 번에 완벽한 명령문을 외우지 않아도 됩니다. 묻고 → 조건을 더하고 → 결과를 확인하세요.</div>
+  </div>
+</section>
+<section class="card answer" id="answer">
+  <div class="content">
+    <div class="badge">정답 / 게임 속 계산</div>
+    <h1>공작에게 제출할 장부</h1>
+    <p class="subtitle">현실 급여 지급액이 아닌, 이번 이야기의 약속된 계산 규칙입니다</p>
+    <table>
+      <thead><tr><th>인부</th><th>기본급</th><th>주휴</th><th>공제 전</th><th>게임 세금</th><th>실지급</th></tr></thead>
+      <tbody>
+        <tr><td>아린</td><td>320,000</td><td>64,000</td><td>384,000</td><td>12,672</td><td>371,328</td></tr>
+        <tr><td>보라</td><td>80,000</td><td>0</td><td>80,000</td><td>2,640</td><td>77,360</td></tr>
+        <tr><td>카이</td><td>270,000</td><td>54,000</td><td>324,000</td><td>10,692</td><td>313,308</td></tr>
+        <tr><td>루나</td><td>67,500</td><td>0</td><td>67,500</td><td>2,228</td><td>65,272</td></tr>
+        <tr><th>합계</th><th>737,500</th><th>118,000</th><th>855,500</th><th>28,232</th><th>827,268</th></tr>
+      </tbody>
+    </table>
+    <p class="big">경비 295,000원 · 영주 총지출 1,150,500원</p>
+    <p class="flag">현실 점검 ① 2026년 한국 최저시급 10,320원 → 주간 1만원 교정 필요</p>
+    <p class="flag">현실 점검 ② 근로자 급여에 3.3%를 일괄 공제할 수 없음</p>
+  </div>
+</section>
+<script>
+const wanted=new URLSearchParams(location.search).get("card")||"work";
+document.getElementById(wanted)?.classList.add("active");
+</script>
+</body>
+</html>
