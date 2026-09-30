@@ -3,74 +3,118 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>규칙 파일 내려받기</title>
+<title>1주차 실습 파일 받기</title>
 <style>
-  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f6e3e1;font-family:'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif;color:#1f2430}
-  .card{background:#fff;border-radius:18px;padding:32px 36px;max-width:420px;width:calc(100% - 48px);box-shadow:0 6px 24px rgba(90,34,51,.12);text-align:center}
-  .tag{color:#b0566e;font-weight:700;font-size:14px}
-  h1{font-size:24px;margin:8px 0 12px}
-  p{color:#5b6275;line-height:1.7;margin:0 0 18px}
-  a.btn{display:inline-block;background:#b0566e;color:#fff;text-decoration:none;font-weight:700;padding:12px 22px;border-radius:999px}
-  .where{margin-top:18px;font-size:14px;color:#5a2233;background:#fbf1f4;border-radius:10px;padding:10px 12px}
+  :root{--rose:#b0566e;--rose-dark:#5a2233;--rose-soft:#fbf1f4;--ink:#1f2430;--sub:#5b6275;--line:#eadde1;--green:#1f7a55}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;background:linear-gradient(135deg,#f9dcd8 0%,#f3d3d8 45%,#d9b3c2 100%);font-family:'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif;color:var(--ink);padding:32px 16px}
+  .page{max-width:1040px;margin:0 auto;background:#fff;border-radius:24px;padding:36px 36px 32px;box-shadow:0 10px 40px rgba(90,34,51,.14)}
+  .head{display:flex;align-items:center;gap:14px}
+  .num{flex:none;width:44px;height:44px;border-radius:12px;background:var(--rose);color:#fff;font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center}
+  h1{font-size:28px;margin:0}
+  .lead{color:var(--sub);margin:10px 0 26px;line-height:1.7}
+  h2{font-size:19px;margin:30px 0 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  h2 small{font-weight:400;color:var(--sub);font-size:14px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{background:#faf7f8;border:1.5px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column}
+  .card .top{display:flex;align-items:center;gap:12px}
+  .doc{flex:none;width:40px;height:48px;border:2px solid #dcc7ce;border-radius:6px;background:#fff;position:relative}
+  .doc:before{content:"";position:absolute;left:8px;right:8px;top:12px;height:2px;background:#dcc7ce;box-shadow:0 8px 0 #dcc7ce,0 16px 0 #dcc7ce}
+  .card h3{margin:0;font-size:19px;word-break:keep-all;overflow-wrap:anywhere}
+  .card p{color:var(--sub);line-height:1.6;margin:12px 0 14px;flex:1;word-break:keep-all}
+  .where{text-align:center;border:1.5px solid var(--rose);color:var(--rose);border-radius:999px;padding:6px 10px;font-size:13px;font-weight:700;margin-bottom:12px}
+  .where.green{border-color:var(--green);color:var(--green)}
+  .btn{display:block;width:100%;border:0;cursor:pointer;background:var(--rose);color:#fff;font:inherit;font-weight:800;font-size:15px;padding:13px 12px;border-radius:999px;text-align:center;text-decoration:none}
+  .btn:hover{background:#9a4860}
+  .btn.done{background:#7d8a82}
+  .all{margin-top:30px;background:var(--rose);border-radius:20px;padding:22px 24px;color:#fff;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+  .all div{flex:1;min-width:220px}
+  .all b{font-size:19px}
+  .all span{display:block;opacity:.92;font-size:14px;margin-top:4px;line-height:1.6}
+  .all .btn{width:auto;background:#fff;color:var(--rose-dark);padding:13px 26px}
+  .all .btn:hover{background:var(--rose-soft)}
+  .note{margin-top:18px;text-align:center;color:var(--sub);font-size:14px;line-height:1.7}
+  .note b{color:var(--rose-dark)}
+  .msg{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 18px;border-radius:12px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;max-width:calc(100% - 32px)}
+  .msg.show{opacity:1}
+  @media (max-width:820px){.grid{grid-template-columns:1fr}.page{padding:26px 18px}h1{font-size:23px}}
 </style>
 </head>
 <body>
-<div class="card">
-  <div class="tag">1주차 규칙 파일</div>
-  <h1 id="name">파일 내려받기</h1>
-  <p id="msg">잠깐만요, 파일을 내려받고 있어요.</p>
-  <a class="btn" id="again" href="#">다시 내려받기</a>
-  <div class="where" id="where"></div>
+<div class="page">
+  <div class="head"><div class="num">1</div><h1>1주차 실습 파일 받기</h1></div>
+  <p class="lead">버튼을 누르면 「다운로드」 폴더에 바로 받아져요. 윈도우·맥 모두 같아요.</p>
+
+  <h2>① 규칙 파일 3개 <small>먼저 받아요</small></h2>
+  <div class="grid" id="rules"></div>
+
+  <h2>② 실습 파일 <small>수업 중에 안내할 때 받아요</small></h2>
+  <div class="grid" id="practice"></div>
+
+  <div class="all">
+    <div><b>한 번에 모두 받기</b><span>위 파일을 zip 하나로 받아요. 받은 파일을 더블클릭하면 「북부대공_실습파일」 폴더가 생겨요.</span></div>
+    <a class="btn" href="downloads/goldmine-files.zip" download="북부대공_실습파일.zip">⬇&nbsp; zip으로 모두 받기</a>
+  </div>
+
+  <p class="note"><b>파일 이름은 그대로 두세요!</b><br>같은 이름의 파일이 이미 있으면 덮어쓰지 말고, AI에게 합쳐 달라고 하세요.</p>
 </div>
+<div class="msg" id="msg"></div>
+
 <script>
-  var FILES = {
-    'AGENTS.md': 'me 폴더(AI 작업 폴더) 바로 안에 넣어요',
-    'CLAUDE.md': 'me 폴더(AI 작업 폴더) 바로 안에 넣어요',
-    'AI협업규칙.md': 'me 안의 Obsidian Vault(옵시디언 보관함)에 넣어요'
-  };
-  var EXTRA = {
-    '00_북부성_실습_상황.md': 'AI 채팅창에 끌어다 놓아요 (도전 코스: me\\북부대공 폴더에)',
-    '대공의_서류.md': '대공이 건넨 서류예요. AI 채팅창에 끌어다 놓아요',
-    '대공의_서류_2주차.md': '대공의 두 번째 서류(예정과 실제)예요. AI 채팅창에 끌어다 놓아요'
-  };
-  var DIRS = { '00_북부성_실습_상황.md': '', '대공의_서류.md': 'duke/', '대공의_서류_2주차.md': 'duke/' };
-  var f = new URLSearchParams(location.search).get('f') || '';
-  if (EXTRA[f]) { FILES[f] = EXTRA[f]; }
-  var nameEl = document.getElementById('name'), msg = document.getElementById('msg'), again = document.getElementById('again');
-  if (!FILES[f]) {
-    nameEl.textContent = '규칙 파일 3개';
-    msg.textContent = '하나씩 눌러서 세 개 모두 받아 주세요.';
-    again.style.display = 'none';
-    var box = document.getElementById('where');
-    box.style.background = 'none'; box.style.padding = '0';
-    Object.keys(FILES).forEach(function (k) {
+  var RULES = [
+    { f:'AGENTS.md', path:'rule-files/', desc:'AI가 보관함의 규칙을 찾아가는 시작 안내예요', where:'넣는 곳 · me 폴더에' },
+    { f:'CLAUDE.md', path:'rule-files/', desc:'Claude가 AGENTS.md를 같이 읽게 이어 줘요', where:'넣는 곳 · me 폴더에' },
+    { f:'AI협업규칙.md', path:'rule-files/', desc:'나랑 AI가 같이 읽고 고치는 정리 약속이에요', where:'넣는 곳 · 옵시디언 보관함 안에', green:true }
+  ];
+  var PRACTICE = [
+    { f:'00_북부성_실습_상황.md', path:'', desc:'소설 속 상황이에요. AI 채팅창에 끌어다 놓고 시작해요', where:'실습 시작할 때' },
+    { f:'대공의_서류.md', path:'duke/', desc:'대공이 건넨 근무표예요. 서류 그림도 같이 받아져요', where:'대공이 서류를 건넬 때', also:'대공의_서류.png' },
+    { f:'대공의_서류_2주차.md', path:'duke/', desc:'예정과 실제가 다른 두 번째 서류예요', where:'빨리 끝난 분 · 확장 퀘스트' }
+  ];
+  var ALL = {}; RULES.concat(PRACTICE).forEach(function (x) { ALL[x.f] = x; });
+  ALL['대공의_서류.png'] = { f:'대공의_서류.png', path:'duke/' };
+
+  var msgEl = document.getElementById('msg'), timer;
+  function toast(s) { msgEl.textContent = s; msgEl.classList.add('show'); clearTimeout(timer); timer = setTimeout(function () { msgEl.classList.remove('show'); }, 3500); }
+
+  // 한글 파일 이름 그대로 저장되게 blob으로 내려받기
+  function download(name) {
+    var x = ALL[name];
+    var type = /\.png$/.test(name) ? 'image/png' : 'text/markdown;charset=utf-8';
+    return fetch(x.path + encodeURIComponent(name)).then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+      return r.blob();
+    }).then(function (b) {
       var a = document.createElement('a');
-      a.className = 'btn'; a.href = '?f=' + encodeURIComponent(k);
-      a.textContent = '⬇  ' + k + ' 내려받기';
-      a.style.display = 'block'; a.style.margin = '10px 0 4px';
-      var s = document.createElement('div');
-      s.textContent = FILES[k]; s.style.fontSize = '13px'; s.style.color = '#5b6275'; s.style.marginBottom = '8px';
-      box.appendChild(a); box.appendChild(s);
+      a.href = URL.createObjectURL(new Blob([b], { type: type }));
+      a.download = name;
+      document.body.appendChild(a); a.click(); a.remove();
     });
-  } else {
-    nameEl.textContent = f;
-    document.getElementById('where').textContent = '넣는 곳: ' + FILES[f];
-    function go() {
-      fetch((DIRS[f] || 'rule-files/') + encodeURIComponent(f)).then(function (r) {
-        if (!r.ok) throw new Error(r.status);
-        return r.blob();
-      }).then(function (b) {
-        var a = document.createElement('a');
-        a.href = URL.createObjectURL(new Blob([b], { type: 'text/markdown;charset=utf-8' }));
-        a.download = f;
-        document.body.appendChild(a); a.click(); a.remove();
-        msg.textContent = '내려받았어요! 「다운로드」 폴더를 확인해 보세요. 이 창은 닫아도 돼요.';
-      }).catch(function () {
-        msg.textContent = '내려받기가 안 됐어요. 아래 버튼을 한 번 더 눌러 주세요.';
-      });
-    }
-    again.onclick = function (e) { e.preventDefault(); go(); };
-    go();
+  }
+
+  function card(x, box) {
+    var el = document.createElement('div'); el.className = 'card';
+    el.innerHTML = '<div class="top"><div class="doc"></div><h3></h3></div><p></p><div class="where"></div><button class="btn" type="button"></button>';
+    el.querySelector('h3').textContent = x.f;
+    el.querySelector('p').textContent = x.desc;
+    var w = el.querySelector('.where'); w.textContent = x.where; if (x.green) w.classList.add('green');
+    var b = el.querySelector('.btn'); b.textContent = '⬇  ' + x.f + ' 내려받기';
+    b.onclick = function () {
+      var list = [x.f].concat(x.also ? [x.also] : []);
+      list.reduce(function (p, n) { return p.then(function () { return download(n); }); }, Promise.resolve())
+        .then(function () { b.classList.add('done'); b.textContent = '✓  받았어요 (다시 받기)'; toast('「다운로드」 폴더를 확인해 보세요.'); })
+        .catch(function () { toast('내려받기가 안 됐어요. 버튼을 한 번 더 눌러 주세요.'); });
+    };
+    box.appendChild(el);
+  }
+  RULES.forEach(function (x) { card(x, document.getElementById('rules')); });
+  PRACTICE.forEach(function (x) { card(x, document.getElementById('practice')); });
+
+  // 예전 링크(download.html?f=파일이름)도 바로 내려받게 유지
+  var f = new URLSearchParams(location.search).get('f');
+  if (f && ALL[f]) {
+    download(f).then(function () { toast(f + ' 내려받았어요. 「다운로드」 폴더를 확인해 보세요.'); })
+      .catch(function () { toast('내려받기가 안 됐어요. 아래 버튼을 눌러 주세요.'); });
   }
 </script>
 </body>
