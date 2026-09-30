@@ -52,8 +52,8 @@
   <div class="grid" id="practice"></div>
 
   <div class="all">
-    <div><b>한 번에 모두 받기</b><span>위 파일을 zip 하나로 받아요. 받은 파일을 더블클릭하면 「북부대공_실습파일」 폴더가 생겨요.</span></div>
-    <a class="btn" href="downloads/goldmine-files.zip" download="북부대공_실습파일.zip">⬇&nbsp; zip으로 모두 받기</a>
+    <div><b>북부대공 실습 한 번에 모두 받기</b><span>실습 파일을 zip 하나로 받아요. 더블클릭해서 풀면 「북부대공」 폴더가 생겨요. 이 폴더째 me 안에 넣으면 돼요.</span></div>
+    <a class="btn" href="downloads/goldmine-files.zip" download="북부대공.zip">⬇&nbsp; zip으로 모두 받기</a>
   </div>
 
   <p class="note"><b>파일 이름은 그대로 두세요!</b><br>같은 이름의 파일이 이미 있으면 덮어쓰지 말고, AI에게 합쳐 달라고 하세요.</p>
@@ -68,8 +68,7 @@
   ];
   var PRACTICE = [
     { f:'00_북부성_실습_상황.md', path:'', desc:'소설 속 상황이에요. AI 채팅창에 끌어다 놓고 시작해요', where:'실습 시작할 때' },
-    { f:'대공의_서류.md', path:'duke/', desc:'대공이 건넨 근무표예요. 서류 그림도 같이 받아져요', where:'대공이 서류를 건넬 때', also:'대공의_서류.png' },
-    { f:'대공의_서류_2주차.md', path:'duke/', desc:'예정과 실제가 다른 두 번째 서류예요', where:'빨리 끝난 분 · 확장 퀘스트' }
+    { f:'대공의_서류.md', path:'duke/', desc:'대공이 건넨 근무표예요. 서류 그림도 같이 받아져요', where:'대공이 서류를 건넬 때', also:'대공의_서류.png' }
   ];
   var ALL = {}; RULES.concat(PRACTICE).forEach(function (x) { ALL[x.f] = x; });
   ALL['대공의_서류.png'] = { f:'대공의_서류.png', path:'duke/' };
