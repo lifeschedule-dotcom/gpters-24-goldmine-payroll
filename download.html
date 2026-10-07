@@ -53,7 +53,7 @@
 
   <h2>③ 2주차 실습 파일 다운로드하기 <small>둘이검토 스킬 · AI 둘이 서로 검토하게 하는 절차</small></h2>
   <div class="grid" id="skills"></div>
-  <p class="note" style="text-align:left;margin-top:10px"><b>스킬 넣는 법</b> — 받은 SKILL.md를 Claude Code 채팅창에 끌어다 놓고 <b>"내 스킬로 설치해 줘"</b>라고 하면 끝이에요. 다시 열고 <b>/duli</b> 라고 치면 돼요. GPT는 파일을 첨부하고 <b>"이 파일 읽고 반장으로 진행해"</b>라고 하면 돼요.</p>
+  <div class="note" style="text-align:left;margin-top:10px;line-height:1.8"><b>스킬 넣는 법</b><br>1) 위 버튼으로 SKILL.md를 받아요. 어디에 받아도 돼요.<br>2) Claude Code나 Codex 채팅창에 그 파일을 끌어다 놓고, 아래 문장을 붙여 넣어요.<br><span id="prompt" style="display:block;background:#fbf1f4;border-radius:12px;padding:12px 14px;margin:8px 0;color:#1f2430">첨부한 SKILL.md를 내 AI 작업 폴더(me) 안에 .claude/skills/duli/SKILL.md 로 넣어 줘. 옵시디언 보관함을 쓰고 있으면 AI협업규칙.md에 따라 홈이나 전체 작업물 지도에 '둘이검토 스킬' 소개 한 줄과 원본 위치 링크를 넣어 줘. 다 되면 넣은 경로를 알려 줘.</span><button class="btn" type="button" style="width:auto;padding:9px 18px;font-size:14px" onclick="copyPrompt()">📋 이 문장 복사하기</button><br>3) 다음부터는 채팅창에 <b>/duli</b> 라고 치거나 "둘이검토 돌려"라고 말해요.<br><b>ChatGPT는</b> 설치 없이 파일을 첨부하고 <b>"이 파일 읽고 반장으로 진행해"</b>라고 하면 돼요.</div>
 
   <div class="all">
     <div><b>북부대공 실습 한 번에 모두 받기</b><span>실습 파일을 zip 하나로 받아요. 더블클릭해서 풀면 「북부대공」 폴더가 생겨요. 이 폴더째 me 안에 넣으면 돼요.</span></div>
@@ -81,6 +81,7 @@
   ALL['대공의_서류.png'] = { f:'대공의_서류.png', path:'duke/' };
 
   var msgEl = document.getElementById('msg'), timer;
+  function copyPrompt() { var t = document.getElementById('prompt').textContent; (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { toast('복사했어요. 채팅창에 붙여 넣으세요.'); }).catch(function () { toast('복사가 안 되면 문장을 드래그해서 복사하세요.'); }); }
   function toast(s) { msgEl.textContent = s; msgEl.classList.add('show'); clearTimeout(timer); timer = setTimeout(function () { msgEl.classList.remove('show'); }, 3500); }
 
   // 한글 파일 이름 그대로 저장되게 blob으로 내려받기
