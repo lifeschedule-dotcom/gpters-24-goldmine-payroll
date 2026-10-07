@@ -51,6 +51,10 @@
   <h2>② 실습 파일 <small>수업 중에 안내할 때 받아요</small></h2>
   <div class="grid" id="practice"></div>
 
+  <h2>③ 재검토 루프 스킬 <small>AI 둘이 서로 검토하게 하는 절차 · 2주차부터</small></h2>
+  <div class="grid" id="skills"></div>
+  <p class="note" style="text-align:left;margin-top:10px"><b>스킬 넣는 법</b> — 1) me 폴더 안에 <b>.claude</b> 폴더, 그 안에 <b>skills</b> 폴더, 그 안에 <b>review-loop</b> 폴더를 만들어요. 2) 받은 SKILL.md를 그 안에 넣어요. 3) Claude Code를 다시 열고 채팅창에 <b>/review-loop</b> 라고 치면 돼요. GPT·Codex는 이 파일을 열어 "이 파일을 읽고 감독관으로 진행해"라고 하면 돼요.</p>
+
   <div class="all">
     <div><b>북부대공 실습 한 번에 모두 받기</b><span>실습 파일을 zip 하나로 받아요. 더블클릭해서 풀면 「북부대공」 폴더가 생겨요. 이 폴더째 me 안에 넣으면 돼요.</span></div>
     <a class="btn" href="downloads/goldmine-files.zip" download="북부대공.zip">⬇&nbsp; zip으로 모두 받기</a>
@@ -70,7 +74,10 @@
     { f:'00_북부성_실습_상황.md', path:'', desc:'소설 속 상황이에요. AI 채팅창에 끌어다 놓고 시작해요', where:'실습 시작할 때' },
     { f:'대공의_서류.md', path:'duke/', desc:'대공이 건넨 근무표예요. 서류 그림도 같이 받아져요', where:'대공이 서류를 건넬 때', also:'대공의_서류.png' }
   ];
-  var ALL = {}; RULES.concat(PRACTICE).forEach(function (x) { ALL[x.f] = x; });
+  var SKILLS = [
+    { f:'SKILL.md', path:'skills/review-loop/', desc:'재검토 루프예요. 일을 나누고, 합치고, "새로 발견한 것 없음"까지 서로 검토해요', where:'넣는 곳 · me › .claude › skills › review-loop 폴더 안에', green:true }
+  ];
+  var ALL = {}; RULES.concat(PRACTICE, SKILLS).forEach(function (x) { ALL[x.f] = x; });
   ALL['대공의_서류.png'] = { f:'대공의_서류.png', path:'duke/' };
 
   var msgEl = document.getElementById('msg'), timer;
@@ -108,6 +115,7 @@
   }
   RULES.forEach(function (x) { card(x, document.getElementById('rules')); });
   PRACTICE.forEach(function (x) { card(x, document.getElementById('practice')); });
+  SKILLS.forEach(function (x) { card(x, document.getElementById('skills')); });
 
   // 예전 링크(download.html?f=파일이름)도 바로 내려받게 유지
   var f = new URLSearchParams(location.search).get('f');
